@@ -32,10 +32,10 @@
 								elseif ($defaultValue)
 										return $defaultValue;
 								else
-										throw new Exception('Incorrect path');
+										throw new Exception('Incorrect name');
 
 						/**
-						 * P.S. В задании не описан случай, при котором передается путь не до конечного элемента в массиве настроек,
+						 * P.S. В задании не описан случай, при котором передается имя не конечного элемента в массиве настроек,
 						 * поэтому было принято решение не обрабатывать этот кейс. Но можно на этапе возврата значения сделать
 						 * проверку вида is_array($projectSettings) и выдать исключение, либо отформатировать массив для вывода.
 						 */
@@ -54,7 +54,7 @@
 
 				echo "$firstTest $secondTest $thirdTest $fourthTest ";
 
-				$fifthTest = config('invalid.path');
+				$fifthTest = config('invalid.name');
 		}
 		catch (Exception $e)
 		{
