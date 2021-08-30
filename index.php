@@ -1,11 +1,14 @@
-<?
+<?php
+
+		/** Путь к файлу настроек */
+		const SETTINGS_FILE = 'settings.php';
 
 		/**
 		 * Получить значение элемента конфигурации
 		 *
 		 * Функция пытается найти указанное в $optionName значение внутри массива с конфигурацией settings.php, в случае
-		 * отсутствия значения возвращает значение по умолчанию, передаваемое в $defaultValue. Если значение не передано, то
-		 * выбрасывается исключение.
+		 * отсутствия значения возвращает значение по умолчанию, передаваемое в $defaultValue. Если значение не передано,
+		 * то выбрасывается исключение.
 		 *
 		 * @param  string  $optionName    - название элемента
 		 * @param  string  $defaultValue  - возвращаемое значение по умолчанию
@@ -17,7 +20,7 @@
 		 */
 		function config(string $optionName, string $defaultValue = '')
 		{
-				$projectSettings = include_once 'settings.php';
+				$projectSettings = include SETTINGS_FILE;
 
 				if (is_array($projectSettings))
 				{
@@ -32,9 +35,9 @@
 										throw new Exception('Incorrect path');
 
 						/**
-						 * В задании не описан случай, при котором передается путь не до конечного элемента в массиве настроек,
+						 * P.S. В задании не описан случай, при котором передается путь не до конечного элемента в массиве настроек,
 						 * поэтому было принято решение не обрабатывать этот кейс. Но можно на этапе возврата значения сделать
-						 * проверку вида is_array($projectSettings) и выдать исключение, либо отформатировать массив для вывода
+						 * проверку вида is_array($projectSettings) и выдать исключение, либо отформатировать массив для вывода.
 						 */
 						return $projectSettings;
 				}
@@ -44,7 +47,14 @@
 
 		try
 		{
-				echo config("assets");
+				$firstTest = config('site_url');
+				$secondTest = config('db.user');
+				$thirdTest = config('app.services.resizer.fallback_format');
+				$fourthTest = config('db.host', 'localhost');
+
+				echo "$firstTest $secondTest $thirdTest $fourthTest ";
+
+				$fifthTest = config('invalid.path');
 		}
 		catch (Exception $e)
 		{
